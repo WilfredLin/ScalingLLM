@@ -1,0 +1,40 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+class LLMScaling:
+    def __init__(self, model_size, compute_budget):
+        self.model_size = model_size
+        self.compute_budget = compute_budget
+        self.performance = []
+
+    def scale_parameters(self, new_size):
+        # Simulate performance based on model size
+        performance = np.log(new_size) * 100
+        return performance
+
+    def scale_compute(self, compute_factor):
+        # Simulate performance based on compute budget
+        performance = np.sqrt(compute_factor) * 100
+        return performance
+
+    def evaluate(self):
+        sizes = np.arange(1, self.model_size + 1)
+        compute_factors = np.arange(1, self.compute_budget + 1)
+
+        self.performance = [self.scale_parameters(size) for size in sizes]
+        compute_performance = [self.scale_compute(factor) for factor in compute_factors]
+
+        plt.figure(figsize=(10, 6))
+        plt.plot(sizes, self.performance, label='Scaling Model Parameters', color='blue', marker='o')
+        plt.plot(compute_factors, compute_performance, label='Scaling Compute Budget', color='orange', marker='x')
+        plt.xlabel('Size / Compute Factor')
+        plt.ylabel('Performance')
+        plt.title('Scaling LLM Performance')
+        plt.legend()
+        plt.grid()
+        plt.tight_layout()
+        plt.show()
+
+# Example usage
+llm_scaling = LLMScaling(model_size=50, compute_budget=50)
+llm_scaling.evaluate()
